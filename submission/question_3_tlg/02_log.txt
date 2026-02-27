@@ -1,0 +1,132 @@
+Warning messages:
+1: package 'pharmaverseadam' was built under R version 4.4.3 
+2: package 'dplyr' was built under R version 4.4.3 
+Safety population: 254 subjects
+# A tibble: 3 x 2
+  ACTARM                   N
+  <chr>                <int>
+1 Placebo                 86
+2 Xanomeline High Dose    72
+3 Xanomeline Low Dose     96
+TEAE records: 1122 | Subjects: 217
+
+── Plot 1: Severity Distribution ────────────────────────────────────
+Plot 1 counts:
+# A tibble: 9 x 3
+  ACTARM               AESEV    ae_count
+  <fct>                <fct>       <int>
+1 Placebo              SEVERE          6
+2 Placebo              MODERATE       65
+3 Placebo              MILD          210
+4 Xanomeline High Dose SEVERE         10
+5 Xanomeline High Dose MODERATE      118
+6 Xanomeline High Dose MILD          286
+7 Xanomeline Low Dose  SEVERE         25
+8 Xanomeline Low Dose  MODERATE      170
+9 Xanomeline Low Dose  MILD          232
+Saved: output/ae_severity_distribution.png
+
+── Plot 2: Top 10 AE Forest Plot ────────────────────────────────────
+Unique AE terms (AETERM): 230
+Top 10 AEs:
+# A tibble: 10 x 5
+   AETERM                          n    pct ci_lower ci_upper
+   <fct>                       <int>  <dbl>    <dbl>    <dbl>
+ 1 PRURITUS                       54 0.213    0.164     0.268
+ 2 APPLICATION SITE PRURITUS      50 0.197    0.150     0.251
+ 3 ERYTHEMA                       36 0.142    0.101     0.191
+ 4 APPLICATION SITE ERYTHEMA      30 0.118    0.0811    0.164
+ 5 RASH                           26 0.102    0.0680    0.146
+ 6 APPLICATION SITE DERMATITIS    21 0.0827   0.0519    0.124
+ 7 APPLICATION SITE IRRITATION    21 0.0827   0.0519    0.124
+ 8 DIZZINESS                      21 0.0827   0.0519    0.124
+ 9 DIARRHOEA                      17 0.0669   0.0395    0.105
+10 SINUS BRADYCARDIA              17 0.0669   0.0395    0.105
+Saved: output/ae_top10_forest_plot.png
+
+── Verification ──────────────────────────────────────────────────────
+Plot 1 arms: Placebo, Xanomeline High Dose, Xanomeline Low Dose
+Plot 1 severity levels: SEVERE, MODERATE, MILD
+Plot 2 total N: 254
+Plot 2 top 10 AEs (AETERM, n, %):
+# A tibble: 10 x 3
+   AETERM                          n pct  
+   <fct>                       <int> <chr>
+ 1 PRURITUS                       54 21.3%
+ 2 APPLICATION SITE PRURITUS      50 19.7%
+ 3 ERYTHEMA                       36 14.2%
+ 4 APPLICATION SITE ERYTHEMA      30 11.8%
+ 5 RASH                           26 10.2%
+ 6 APPLICATION SITE DERMATITIS    21 8.3% 
+ 7 APPLICATION SITE IRRITATION    21 8.3% 
+ 8 DIZZINESS                      21 8.3% 
+ 9 DIARRHOEA                      17 6.7% 
+10 SINUS BRADYCARDIA              17 6.7% 
+
+== STATUS: SUCCESS — all outputs written error-free ==
+Warning messages:
+1: package 'pharmaverseadam' was built under R version 4.4.3 
+2: package 'dplyr' was built under R version 4.4.3 
+Safety population: 254 subjects
+# A tibble: 3 x 2
+  ACTARM                   N
+  <chr>                <int>
+1 Placebo                 86
+2 Xanomeline High Dose    72
+3 Xanomeline Low Dose     96
+TEAE records: 1122 | Subjects: 217
+
+── Plot 1: Severity Distribution ────────────────────────────────────
+Plot 1 counts:
+# A tibble: 9 x 3
+  ACTARM               AESEV    ae_count
+  <fct>                <fct>       <int>
+1 Placebo              SEVERE          6
+2 Placebo              MODERATE       65
+3 Placebo              MILD          210
+4 Xanomeline High Dose SEVERE         10
+5 Xanomeline High Dose MODERATE      118
+6 Xanomeline High Dose MILD          286
+7 Xanomeline Low Dose  SEVERE         25
+8 Xanomeline Low Dose  MODERATE      170
+9 Xanomeline Low Dose  MILD          232
+Saved: output/ae_severity_distribution.png
+
+── Plot 2: Top 10 AE Forest Plot ────────────────────────────────────
+Unique AE terms (AETERM): 230
+Top 10 AEs:
+# A tibble: 10 x 5
+   AETERM                          n    pct ci_lower ci_upper
+   <fct>                       <int>  <dbl>    <dbl>    <dbl>
+ 1 PRURITUS                       54 0.213    0.164     0.268
+ 2 APPLICATION SITE PRURITUS      50 0.197    0.150     0.251
+ 3 ERYTHEMA                       36 0.142    0.101     0.191
+ 4 APPLICATION SITE ERYTHEMA      30 0.118    0.0811    0.164
+ 5 RASH                           26 0.102    0.0680    0.146
+ 6 APPLICATION SITE DERMATITIS    21 0.0827   0.0519    0.124
+ 7 APPLICATION SITE IRRITATION    21 0.0827   0.0519    0.124
+ 8 DIZZINESS                      21 0.0827   0.0519    0.124
+ 9 DIARRHOEA                      17 0.0669   0.0395    0.105
+10 SINUS BRADYCARDIA              17 0.0669   0.0395    0.105
+Saved: output/ae_top10_forest_plot.png
+
+── Verification ──────────────────────────────────────────────────────
+Plot 1 arms: Placebo, Xanomeline High Dose, Xanomeline Low Dose
+Plot 1 severity levels: SEVERE, MODERATE, MILD
+Plot 2 total N: 254
+Plot 2 top 10 AEs (AETERM, n, %):
+# A tibble: 10 x 3
+   AETERM                          n pct  
+   <fct>                       <int> <chr>
+ 1 PRURITUS                       54 21.3%
+ 2 APPLICATION SITE PRURITUS      50 19.7%
+ 3 ERYTHEMA                       36 14.2%
+ 4 APPLICATION SITE ERYTHEMA      30 11.8%
+ 5 RASH                           26 10.2%
+ 6 APPLICATION SITE DERMATITIS    21 8.3% 
+ 7 APPLICATION SITE IRRITATION    21 8.3% 
+ 8 DIZZINESS                      21 8.3% 
+ 9 DIARRHOEA                      17 6.7% 
+10 SINUS BRADYCARDIA              17 6.7% 
+
+== STATUS: SUCCESS — all outputs written error-free ==

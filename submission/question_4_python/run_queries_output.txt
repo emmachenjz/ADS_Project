@@ -1,0 +1,20 @@
+=== ClinicalTrialDataAgent — Q4 Demo ===
+Data   : /Users/emma/Documents/roche/question_4_python/data/adae.csv
+Mode   : mock (keyword fallback)
+========================================
+
+Query   : Give me the subjects who had adverse events of Moderate severity
+→ Parsed: {'target_column': 'AESEV', 'filter_value': 'MODERATE'}
+→ Results: 136 unique subjects
+→ Subject IDs: [01-701-1023, 01-701-1047, 01-701-1097, 01-701-1111, 01-701-1115, 01-701-1133, 01-701-1146, 01-701-1148, 01-701-1180, 01-701-1181] ... (+126 more)
+
+Query   : Which patients experienced Dizziness?
+→ Parsed: {'target_column': 'AETERM', 'filter_value': 'DIZZINESS'}
+→ Results: 22 unique subjects
+→ Subject IDs: [01-701-1302, 01-703-1258, 01-704-1009, 01-704-1065, 01-708-1019, 01-708-1084, 01-708-1087, 01-708-1178, 01-708-1253, 01-708-1336] ... (+12 more)
+
+Query   : Show me subjects with cardiac system adverse events
+→ Parsed: {'target_column': 'AESOC', 'filter_value': 'CARDIAC DISORDERS'}
+→ Results: 44 unique subjects
+→ Subject IDs: [01-701-1023, 01-701-1047, 01-703-1175, 01-703-1299, 01-703-1335, 01-704-1008, 01-704-1017, 01-704-1025, 01-704-1065, 01-704-1266] ... (+34 more)
+

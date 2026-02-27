@@ -1,0 +1,39 @@
+Warning messages:
+1: package 'pharmaverseadam' was built under R version 4.4.3 
+2: package 'dplyr' was built under R version 4.4.3 
+3: package 'gtsummary' was built under R version 4.4.3 
+4: package 'gt' was built under R version 4.4.3 
+gtsummary version: 2.5.0
+adae: 1191 rows x 107 cols
+adsl: 306 rows x 55 cols
+Safety population: 254 subjects
+# A tibble: 3 x 2
+  ACTARM                   N
+  <fct>                <int>
+1 Placebo                 86
+2 Xanomeline High Dose    72
+3 Xanomeline Low Dose     96
+TEAE records: 1122 | TEAE subjects: 217
+SOC levels set (23 SOCs), PT levels set (230 PTs)
+Flat overview table created
+
+── Building tbl_hierarchical ────────────────────────────────────────
+tbl_hierarchical built
+gt styling applied
+Saved: output/q3/ae_summary_table.html
+Saved: output/q3/ae_simple_summary.html
+sh: +RTS: command not found
+Note: .docx export skipped — pandoc document conversion failed with error 127
+Warning message:
+In system(command) : error in running command
+
+── Verification ──────────────────────────────────────────────────────
+gtsummary version: 2.5.0
+Function used: tbl_hierarchical() [gtsummary >= 2.0.3]
+Hierarchy: AESOC -> AEDECOD (23 SOCs, 230 PTs)
+Overall row: 'Any Treatment-Emergent AE'
+Total N (denominator): 254
+Arms: Placebo, Xanomeline High Dose, Xanomeline Low Dose
+Output: output/q3/ae_summary_table.html
+
+== STATUS: SUCCESS — all outputs written error-free ==

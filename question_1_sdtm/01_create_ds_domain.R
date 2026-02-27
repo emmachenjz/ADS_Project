@@ -252,6 +252,11 @@ ds <- # ── DSTERM: verbatim disposition term (no CT lookup) ─────�
   )
 
 message("DS domain built: ", nrow(ds), " rows x ", ncol(ds), " cols")
+# Note on sdtm.oak informational messages:
+# assign_ct() may print "could not be mapped" messages during the pipeline above.
+# These are *informational* — they indicate terms not found in collected_value or
+# term_value, which are then resolved via a toupper() case-insensitive fallback.
+# All DSDECOD values are correctly assigned; see the QC section below for verification.
 
 # ── 7. Save outputs ───────────────────────────────────────────────────────────
 
