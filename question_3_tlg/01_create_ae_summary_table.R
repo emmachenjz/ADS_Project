@@ -23,8 +23,8 @@
 #   - Table package:    {gtsummary} tbl_hierarchical() → as_gt() → styled with {gt}
 #
 # Inputs:  pharmaverseadam::adae, pharmaverseadam::adsl
-# Outputs: output/q3/ae_summary_table.html      (main — FDA Table 10 style)
-#          output/q3/ae_simple_summary.html      (gtsummary flat any-TEAE overview)
+# Outputs: question_3_tlg/ae_summary_table.html      (main — FDA Table 10 style)
+#          question_3_tlg/ae_simple_summary.html      (gtsummary flat any-TEAE overview)
 # ==============================================================================
 
 suppressPackageStartupMessages({
@@ -35,6 +35,14 @@ suppressPackageStartupMessages({
   library(gt)
   library(here)
 })
+
+# ── Log setup: tee all output to log file (works with Ctrl+A + Ctrl+Enter) ────
+.log_path <- here("question_3_tlg", "01_log.txt")
+.log_con  <- file(.log_path, open = "wt")
+sink(.log_con, type = "output", split = TRUE)
+message <- function(..., domain = NULL, appendLF = TRUE) {
+  cat(paste0(..., if (isTRUE(appendLF)) "\n" else ""))
+}
 
 message("gtsummary version: ", as.character(packageVersion("gtsummary")))
 
@@ -204,15 +212,15 @@ message("gt styling applied")
 
 # ── 8. Save outputs ───────────────────────────────────────────────────────────
 
-dir.create(here("output", "q3"), showWarnings = FALSE, recursive = TRUE)
+dir.create(here("question_3_tlg"), showWarnings = FALSE, recursive = TRUE)
 
 # Primary output: full nested HTML table
-gtsave(gt_tbl, here("output", "q3", "ae_summary_table.html"))
-message("Saved: output/q3/ae_summary_table.html")
+gtsave(gt_tbl, here("question_3_tlg", "ae_summary_table.html"))
+message("Saved: question_3_tlg/ae_summary_table.html")
 
 # Secondary output: flat overview (any-TEAE, gtsummary tbl_summary)
-gtsave(as_gt(tbl_overview), here("output", "q3", "ae_simple_summary.html"))
-message("Saved: output/q3/ae_simple_summary.html")
+gtsave(as_gt(tbl_overview), here("question_3_tlg", "ae_simple_summary.html"))
+message("Saved: question_3_tlg/ae_simple_summary.html")
 
 # Optional DOCX export — requires pandoc on PATH; skipped gracefully if unavailable.
 # Primary deliverable is ae_summary_table.html (already saved above).
@@ -226,9 +234,9 @@ docx_ok <- tryCatch({
     )
   }
   suppressWarnings(
-    gtsave(gt_tbl, here("output", "q3", "ae_summary_table.docx"))
+    gtsave(gt_tbl, here("question_3_tlg", "ae_summary_table.docx"))
   )
-  message("Saved: output/q3/ae_summary_table.docx")
+  message("Saved: question_3_tlg/ae_summary_table.docx")
   TRUE
 }, error = function(e) {
   message("Note: .docx export skipped — pandoc not available on this system.",
@@ -246,9 +254,13 @@ message("Hierarchy: AESOC -> AEDECOD (", length(soc_levels), " SOCs, ",
 message("Overall row: 'Any Treatment-Emergent AE'")
 message("Total N (denominator): ", total_n)
 message("Arms: ", paste(arm_order, collapse = ", "))
-message("Output: output/q3/ae_summary_table.html")
+message("Output: question_3_tlg/ae_summary_table.html")
 
 message("\n== STATUS: SUCCESS — required HTML outputs written successfully",
         if (exists("docx_ok") && docx_ok) " (DOCX also saved)" else
           " (DOCX skipped — pandoc unavailable, HTML is the required deliverable)",
         " ==")
+
+# ── Close log ─────────────────────────────────────────────────────────────────
+cat(paste0("Log saved: ", .log_path, "\n"))
+sink(type = "output"); close(.log_con); rm(message)

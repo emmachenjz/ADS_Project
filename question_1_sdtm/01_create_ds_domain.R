@@ -17,9 +17,8 @@
 # CT spec: study_ct (hardcoded per assessment instructions)
 # DM:      pharmaversesdtm::dm     (for RFXSTDTC reference date)
 #
-# Outputs: data/ds.rds
-#          data/ds.csv
-#          output/q1/ds_summary.html (optional gt summary)
+# Outputs: question_1_sdtm/ds.rds
+#          question_1_sdtm/ds.csv
 # ==============================================================================
 
 suppressPackageStartupMessages({
@@ -30,6 +29,14 @@ suppressPackageStartupMessages({
   library(readr)
   library(here)
 })
+
+# ── Log setup: tee all output to log file (works with Ctrl+A + Ctrl+Enter) ────
+.log_path <- here("question_1_sdtm", "01_log.txt")
+.log_con  <- file(.log_path, open = "wt")
+sink(.log_con, type = "output", split = TRUE)   # stdout → console + file
+message <- function(..., domain = NULL, appendLF = TRUE) {
+  cat(paste0(..., if (isTRUE(appendLF)) "\n" else ""))
+}
 
 message("sdtm.oak version: ", as.character(packageVersion("sdtm.oak")))
 
@@ -260,14 +267,13 @@ message("DS domain built: ", nrow(ds), " rows x ", ncol(ds), " cols")
 
 # ── 7. Save outputs ───────────────────────────────────────────────────────────
 
-dir.create(here("data"),        showWarnings = FALSE, recursive = TRUE)
-dir.create(here("output","q1"), showWarnings = FALSE, recursive = TRUE)
+dir.create(here("question_1_sdtm"), showWarnings = FALSE, recursive = TRUE)
 
-saveRDS(ds, here("data", "ds.rds"))
-message("Saved: data/ds.rds")
+saveRDS(ds, here("question_1_sdtm", "ds.rds"))
+message("Saved: question_1_sdtm/ds.rds")
 
-readr::write_csv(ds, here("data", "ds.csv"))
-message("Saved: data/ds.csv")
+readr::write_csv(ds, here("question_1_sdtm", "ds.csv"))
+message("Saved: question_1_sdtm/ds.csv")
 
 # ── 8. Quality checks ─────────────────────────────────────────────────────────
 
@@ -313,3 +319,7 @@ message("\nFirst 20 rows:")
 print(head(ds, 20))
 
 message("\n== STATUS: SUCCESS — DS domain created error-free ==")
+
+# ── Close log ─────────────────────────────────────────────────────────────────
+cat(paste0("Log saved: ", .log_path, "\n"))
+sink(type = "output"); close(.log_con); rm(message)

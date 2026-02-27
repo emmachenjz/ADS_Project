@@ -1,13 +1,8 @@
-Warning messages:
-1: package 'pharmaverseadam' was built under R version 4.4.3 
-2: package 'dplyr' was built under R version 4.4.3 
-3: package 'gtsummary' was built under R version 4.4.3 
-4: package 'gt' was built under R version 4.4.3 
 gtsummary version: 2.5.0
 adae: 1191 rows x 107 cols
 adsl: 306 rows x 55 cols
 Safety population: 254 subjects
-# A tibble: 3 x 2
+# A tibble: 3 × 2
   ACTARM                   N
   <fct>                <int>
 1 Placebo                 86
@@ -20,12 +15,9 @@ Flat overview table created
 ── Building tbl_hierarchical ────────────────────────────────────────
 tbl_hierarchical built
 gt styling applied
-Saved: output/q3/ae_summary_table.html
-Saved: output/q3/ae_simple_summary.html
-sh: +RTS: command not found
-Note: .docx export skipped — pandoc document conversion failed with error 127
-Warning message:
-In system(command) : error in running command
+Saved: question_3_tlg/ae_summary_table.html
+Saved: question_3_tlg/ae_simple_summary.html
+Saved: question_3_tlg/ae_summary_table.docx
 
 ── Verification ──────────────────────────────────────────────────────
 gtsummary version: 2.5.0
@@ -34,6 +26,7 @@ Hierarchy: AESOC -> AEDECOD (23 SOCs, 230 PTs)
 Overall row: 'Any Treatment-Emergent AE'
 Total N (denominator): 254
 Arms: Placebo, Xanomeline High Dose, Xanomeline Low Dose
-Output: output/q3/ae_summary_table.html
+Output: question_3_tlg/ae_summary_table.html
 
-== STATUS: SUCCESS — all outputs written error-free ==
+== STATUS: SUCCESS — required HTML outputs written successfully (DOCX also saved) ==
+Log saved: /Users/emma/Documents/roche/question_3_tlg/01_log.txt

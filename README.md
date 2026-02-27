@@ -6,6 +6,8 @@ Solutions to the Pharmaverse Expertise and Python Coding Assessment for the Roch
 
 ## Repository Structure
 
+Each question folder is self-contained: the script, execution log, and all outputs live together.
+
 ```
 .
 ├── README.md
@@ -15,11 +17,13 @@ Solutions to the Pharmaverse Expertise and Python Coding Assessment for the Roch
 ├── question_1_sdtm/                   # Q1: SDTM DS Domain Creation
 │   ├── 01_create_ds_domain.R          # Main script (sdtm.oak pipeline)
 │   ├── 01_log.txt                     # Execution log — evidence of error-free run
+│   ├── ds.rds                         # Output: DS domain (R binary)
 │   └── ds.csv                         # Output: DS domain (850 rows × 12 cols)
 │
 ├── question_2_adam/                   # Q2: ADaM ADSL Dataset Creation
 │   ├── create_adsl.R                  # Main script (admiral pipeline)
 │   ├── create_adsl_log.txt            # Execution log — evidence of error-free run
+│   ├── adsl.rds                       # Output: ADSL dataset (R binary)
 │   └── adsl.csv                       # Output: ADSL dataset (306 rows × 50 cols)
 │
 ├── question_3_tlg/                    # Q3: TLG — Adverse Events Reporting
@@ -27,27 +31,19 @@ Solutions to the Pharmaverse Expertise and Python Coding Assessment for the Roch
 │   ├── 01_log.txt                     # Execution log
 │   ├── 02_create_visualizations.R     # ggplot2 visualizations
 │   ├── 02_log.txt                     # Execution log
-│   ├── ae_summary_table.html          # Output: TEAE summary table (HTML)
-│   ├── ae_severity_distribution.png   # Output: Plot 1 — AE severity by treatment
+│   ├── ae_summary_table.html          # Output: TEAE nested SOC/PT table (HTML)
+│   ├── ae_simple_summary.html         # Output: Any-TEAE flat overview (HTML)
+│   ├── ae_severity_distribution.png   # Output: Plot 1 — AE severity by treatment arm
 │   └── ae_top10_forest_plot.png       # Output: Plot 2 — Top 10 AEs with 95% CI
 │
-├── question_4_python/                 # Q4 (Bonus): GenAI Clinical Data Assistant
-│   ├── clinical_data_agent.py         # Main solution: ClinicalTrialDataAgent class
-│   ├── run_queries.py                 # Test script: runs 3 example queries
-│   ├── requirements.txt               # Python dependencies (pandas, anthropic)
-│   ├── export_adae.R                  # R helper: export pharmaverseadam::adae → CSV
-│   └── data/
-│       └── adae.csv                   # Input data (1191 rows × 107 cols)
-│
-├── data/                              # Intermediate RDS datasets
-│   ├── ds.rds                         # DS domain (R binary)
-│   └── adsl.rds                       # ADSL dataset (R binary)
-│
-└── submission/                        # PDF-specified deliverables, one folder per question
-    ├── question_1_sdtm/
-    ├── question_2_adam/
-    ├── question_3_tlg/
-    └── question_4_python/
+└── question_4_python/                 # Q4 (Bonus): GenAI Clinical Data Assistant
+    ├── clinical_data_agent.py         # Main solution: ClinicalTrialDataAgent class
+    ├── run_queries.py                 # Demo script: runs 3 example queries
+    ├── run_queries_output.txt         # Sample output from a successful run
+    ├── requirements.txt               # Python dependencies (pandas, anthropic)
+    ├── export_adae.R                  # R helper: export pharmaverseadam::adae → CSV
+    └── data/
+        └── adae.csv                   # Input data (1191 rows × 107 cols)
 ```
 
 ---
@@ -84,7 +80,9 @@ source("00_install_packages.R")
 source("question_1_sdtm/01_create_ds_domain.R")
 ```
 
-Output: `question_1_sdtm/ds.csv`, `question_1_sdtm/01_log.txt`
+Outputs to: `question_1_sdtm/ds.rds`, `question_1_sdtm/ds.csv`
+
+---
 
 **Question 2: ADaM ADSL**
 
@@ -92,7 +90,9 @@ Output: `question_1_sdtm/ds.csv`, `question_1_sdtm/01_log.txt`
 source("question_2_adam/create_adsl.R")
 ```
 
-Output: `question_2_adam/adsl.csv`, `question_2_adam/create_adsl_log.txt`
+Outputs to: `question_2_adam/adsl.rds`, `question_2_adam/adsl.csv`
+
+---
 
 **Question 3: TLG — AE Reporting**
 
@@ -101,7 +101,9 @@ source("question_3_tlg/01_create_ae_summary_table.R")
 source("question_3_tlg/02_create_visualizations.R")
 ```
 
-Output: `question_3_tlg/ae_summary_table.html`, `ae_severity_distribution.png`, `ae_top10_forest_plot.png`
+Outputs to: `question_3_tlg/ae_summary_table.html`, `question_3_tlg/ae_simple_summary.html`, `question_3_tlg/ae_severity_distribution.png`, `question_3_tlg/ae_top10_forest_plot.png`
+
+---
 
 **Question 4: GenAI Clinical Data Assistant (Bonus)**
 
@@ -109,12 +111,18 @@ Output: `question_3_tlg/ae_summary_table.html`, `ae_severity_distribution.png`, 
 cd question_4_python
 pip install -r requirements.txt
 
-# Without API key — uses keyword-based mock (no setup needed)
+# Without API key — keyword-based mock, no setup needed
 python run_queries.py
 
 # With Anthropic API key — uses claude-sonnet-4-6 live
 export ANTHROPIC_API_KEY="sk-ant-..."
 python run_queries.py
+```
+
+The script prints results to stdout. To capture output:
+
+```bash
+python run_queries.py > run_queries_output.txt
 ```
 
 ---
@@ -164,4 +172,4 @@ python run_queries.py
 - LLM: `claude-sonnet-4-6` via `anthropic` Python package; system prompt includes full schema
 - LLM returns structured JSON: `{"target_column": "...", "filter_value": "..."}`
 - Keyword-based mock fallback activates automatically when `ANTHROPIC_API_KEY` is unset
-- Verified: MODERATE severity → 136 subjects, DIZZINESS → 22, CARDIAC DISORDERS → 44
+- Verified results: MODERATE severity → 136 subjects, DIZZINESS → 22, CARDIAC DISORDERS → 44

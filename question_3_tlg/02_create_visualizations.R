@@ -19,8 +19,8 @@
 #     • Y-axis:      AE terms ordered by descending frequency (top at top)
 #
 # Inputs:  pharmaverseadam::adae, pharmaverseadam::adsl
-# Outputs: output/q3/ae_severity_distribution.png
-#          output/q3/ae_top10_forest_plot.png
+# Outputs: question_3_tlg/ae_severity_distribution.png
+#          question_3_tlg/ae_top10_forest_plot.png
 # ==============================================================================
 
 suppressPackageStartupMessages({
@@ -31,6 +31,14 @@ suppressPackageStartupMessages({
   library(scales)
   library(here)
 })
+
+# ── Log setup: tee all output to log file (works with Ctrl+A + Ctrl+Enter) ────
+.log_path <- here("question_3_tlg", "02_log.txt")
+.log_con  <- file(.log_path, open = "wt")
+sink(.log_con, type = "output", split = TRUE)
+message <- function(..., domain = NULL, appendLF = TRUE) {
+  cat(paste0(..., if (isTRUE(appendLF)) "\n" else ""))
+}
 
 # ── 1. Load data ──────────────────────────────────────────────────────────────
 
@@ -57,7 +65,7 @@ message("TEAE records: ", nrow(teae),
         " | Subjects: ", n_distinct(teae$USUBJID))
 
 # Output directory
-dir.create(here("output", "q3"), showWarnings = FALSE, recursive = TRUE)
+dir.create(here("question_3_tlg"), showWarnings = FALSE, recursive = TRUE)
 
 # ── 2. Plot 1: AE Severity Distribution by Treatment Arm ─────────────────────
 #
@@ -117,14 +125,14 @@ p1 <- ggplot(plot1_data, aes(x = ACTARM, y = ae_count, fill = AESEV)) +
   )
 
 ggsave(
-  here("output", "q3", "ae_severity_distribution.png"),
+  here("question_3_tlg", "ae_severity_distribution.png"),
   plot   = p1,
   width  = 8,
   height = 6,
   dpi    = 300,
   bg     = "white"
 )
-message("Saved: output/ae_severity_distribution.png")
+message("Saved: question_3_tlg/ae_severity_distribution.png")
 
 # ── 3. Plot 2: Top 10 Most Frequent AEs — Forest / Dot Plot with 95% CI ──────
 #
@@ -197,14 +205,14 @@ p2 <- ggplot(ae_top10, aes(x = pct, y = AETERM)) +
   )
 
 ggsave(
-  here("output", "q3", "ae_top10_forest_plot.png"),
+  here("question_3_tlg", "ae_top10_forest_plot.png"),
   plot   = p2,
   width  = 8,
   height = 6,
   dpi    = 300,
   bg     = "white"
 )
-message("Saved: output/ae_top10_forest_plot.png")
+message("Saved: question_3_tlg/ae_top10_forest_plot.png")
 
 # ── 4. Verification summary ───────────────────────────────────────────────────
 
@@ -218,3 +226,7 @@ print(ae_top10 %>%
         mutate(pct = scales::percent(pct, accuracy = 0.1)))
 
 message("\n== STATUS: SUCCESS — all outputs written error-free ==")
+
+# ── Close log ─────────────────────────────────────────────────────────────────
+cat(paste0("Log saved: ", .log_path, "\n"))
+sink(type = "output"); close(.log_con); rm(message)

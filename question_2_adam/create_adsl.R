@@ -19,8 +19,8 @@
 #  12  Quality-check summary
 #
 # Inputs:  pharmaversesdtm::dm, vs, ex, ds, ae
-# Outputs: output/q2/adsl.rds
-#          output/q2/adsl.csv
+# Outputs: question_2_adam/adsl.rds
+#          question_2_adam/adsl.csv
 #
 # Reference: https://pharmaverse.github.io/admiral/cran-release/articles/adsl.html
 # ==============================================================================
@@ -34,6 +34,14 @@ suppressPackageStartupMessages({
   library(stringr)
   library(here)
 })
+
+# ── Log setup: tee all output to log file (works with Ctrl+A + Ctrl+Enter) ────
+.log_path <- here("question_2_adam", "create_adsl_log.txt")
+.log_con  <- file(.log_path, open = "wt")
+sink(.log_con, type = "output", split = TRUE)
+message <- function(..., domain = NULL, appendLF = TRUE) {
+  cat(paste0(..., if (isTRUE(appendLF)) "\n" else ""))
+}
 
 # ── 1. Load SDTM source data ──────────────────────────────────────────────────
 
@@ -404,19 +412,15 @@ adsl_final <- adsl %>%
 
 # ── 12. Save outputs ──────────────────────────────────────────────────────────
 
-dir.create(here("output", "q2"), showWarnings = FALSE, recursive = TRUE)
-dir.create(here("data"),         showWarnings = FALSE, recursive = TRUE)
+dir.create(here("question_2_adam"), showWarnings = FALSE, recursive = TRUE)
 
 # RDS (lossless — preserves numeric SAS dates as Date objects)
-saveRDS(adsl_final, here("output", "q2", "adsl.rds"))
-message("Saved: output/q2/adsl.rds")
+saveRDS(adsl_final, here("question_2_adam", "adsl.rds"))
+message("Saved: question_2_adam/adsl.rds")
 
 # CSV (human-readable; Date columns are formatted as ISO 8601)
-readr::write_csv(adsl_final, here("output", "q2", "adsl.csv"))
-message("Saved: output/q2/adsl.csv")
-
-# Mirror to data/ for use by other scripts
-saveRDS(adsl_final, here("data", "adsl.rds"))
+readr::write_csv(adsl_final, here("question_2_adam", "adsl.csv"))
+message("Saved: question_2_adam/adsl.csv")
 
 # ── 13. Quality checks ────────────────────────────────────────────────────────
 
@@ -449,3 +453,7 @@ message("LSTAVLDT range: ",
         format(max(adsl_final$LSTAVLDT, na.rm = TRUE), "%Y-%m-%d"))
 
 message("\n== STATUS: SUCCESS — ADSL created error-free ==")
+
+# ── Close log ─────────────────────────────────────────────────────────────────
+cat(paste0("Log saved: ", .log_path, "\n"))
+sink(type = "output"); close(.log_con); rm(message)
