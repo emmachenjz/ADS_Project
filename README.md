@@ -41,7 +41,6 @@ Each question folder is self-contained: the script, execution log, and all outpu
     ├── run_queries.py                 # Demo script: runs 3 example queries
     ├── run_queries_output.txt         # Sample output from a successful run
     ├── requirements.txt               # Python dependencies (pandas, anthropic)
-    ├── export_adae.R                  # R helper: export pharmaverseadam::adae → CSV
     └── data/
         └── adae.csv                   # Input data (1191 rows × 107 cols)
 ```
@@ -157,7 +156,7 @@ python run_queries.py > run_queries_output.txt
 ### Q2 — ADaM ADSL
 - Based on `pharmaversesdtm::dm`; all custom variables derived with `{admiral}` functions
 - `TRTSDTM`/`TRTSTMF`: imputed at hour level ("H") since `EX.EXSTDTC` contains dates only
-- `ITTFL`: "Y" for all 3 randomised arms, "N" for Screen Failure (ARM is populated but not randomised)
+- `ITTFL`: derived strictly per spec (`DM.ARM` non-missing = "Y", else "N")
 - `LSTAVLDT`: maximum of VS, AE, DS, and EX dates (last known alive date)
 - Output: 306 rows × 50 columns
 

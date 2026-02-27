@@ -280,25 +280,17 @@ adsl <- adsl %>%
 
 # ── 9. Custom Variable 3 — ITTFL ──────────────────────────────────────────────
 #
-# ITT flag: "Y" for randomised patients, "N" for screen failures.
+# ITT flag derived per the assessment's literal specification.
 #
 # The spec states: "Y if DM.ARM not equal to missing."
-# In pharmaversesdtm::dm, ARM is populated for all subjects — including screen
-# failures (ARM = "Screen Failure").  A literal !is.na(ARM) check would give
-# ITTFL = "Y" for all 306 subjects, which is clinically incorrect.
-#
-# Interpretation: the spec means "Y for subjects who received a valid treatment
-# randomisation ARM (i.e. randomised subjects)."  Screen Failure is not a
-# randomisation arm — subjects with ARM = "Screen Failure" were NEVER randomised.
-#
-# Implementation: "Y" if ARM is populated AND is not "Screen Failure".
+# Therefore implementation is strictly:
+#   ITTFL = "Y" when ARM is non-missing, else "N".
+# Note: this differs from a typical clinical ITT definition where Screen Failure
+# subjects are usually excluded, but it matches the requested rule exactly.
 
 adsl <- adsl %>%
   mutate(
-    ITTFL = if_else(
-      !is.na(ARM) & ARM != "" & ARM != "Screen Failure",
-      "Y", "N"
-    )
+    ITTFL = if_else(!is.na(ARM), "Y", "N")
   )
 
 # ── 10. Custom Variable 4 — LSTAVLDT ─────────────────────────────────────────

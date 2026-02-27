@@ -14,7 +14,7 @@ Expected:    306 rows (one per subject in DM)
 Duplicate USUBJIDs: 0 (expected: 0)
 
 AGEGR9 distribution:
-# A tibble: 2 × 3
+# A tibble: 2 x 3
   AGEGR9  AGEGR9N     n
   <chr>     <int> <int>
 1 18 - 50       2     1
@@ -22,18 +22,18 @@ AGEGR9 distribution:
 
 TRTSDTM non-missing: 254
 TRTSTMF values:
-# A tibble: 2 × 2
+# A tibble: 2 x 2
   TRTSTMF     n
   <chr>   <int>
 1 H         254
 2 <NA>       52
 
 ITTFL distribution:
-# A tibble: 4 × 3
+# A tibble: 4 x 3
   ACTARM               ITTFL     n
   <chr>                <chr> <int>
 1 Placebo              Y        86
-2 Screen Failure       N        52
+2 Screen Failure       Y        52
 3 Xanomeline High Dose Y        72
 4 Xanomeline Low Dose  Y        96
 
