@@ -7,6 +7,7 @@ Solutions to the Pharmaverse Expertise and Python Coding Assessment for the Roch
 ## Repository Structure
 
 Each question folder is self-contained: the script, execution log, and all outputs live together.
+In addition, `archive/` stores archived snapshots of prior outputs/submission bundles.
 
 ```
 .
@@ -36,13 +37,21 @@ Each question folder is self-contained: the script, execution log, and all outpu
 │   ├── ae_severity_distribution.png   # Output: Plot 1 — AE severity by treatment arm
 │   └── ae_top10_forest_plot.png       # Output: Plot 2 — Top 10 AEs with 95% CI
 │
-└── question_4_python/                 # Q4 (Bonus): GenAI Clinical Data Assistant
+├── question_4_python/                 # Q4 (Bonus): GenAI Clinical Data Assistant
     ├── clinical_data_agent.py         # Main solution: ClinicalTrialDataAgent class
     ├── run_queries.py                 # Demo script: runs 3 example queries
     ├── run_queries_output.txt         # Sample output from a successful run
     ├── requirements.txt               # Python dependencies (pandas, anthropic)
     └── data/
         └── adae.csv                   # Input data (1191 rows × 107 cols)
+
+└── archive/                           # Archived outputs and submission snapshots
+│   ├── output/                        # Archived output files by question
+│   ├── question_1_sdtm/               # Archived scripts/logs
+│   ├── question_2_adam/
+│   ├── question_3_tlg/
+│   ├── question_4_python/
+│   └── submission/                    # Archived packaged submission folders
 ```
 
 ---
@@ -72,6 +81,9 @@ source("00_install_packages.R")
 ```
 
 ### Step 2 — Run each question
+
+Note: Scripts write the latest outputs to their corresponding `question_*` folders.
+Archived copies (if any) are under `archive/` and are for record-keeping only.
 
 **Question 1: SDTM DS Domain**
 
