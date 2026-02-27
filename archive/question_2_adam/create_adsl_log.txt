@@ -1,0 +1,47 @@
+Warning messages:
+1: package 'admiral' was built under R version 4.4.3 
+2: package 'pharmaversesdtm' was built under R version 4.4.3 
+3: package 'dplyr' was built under R version 4.4.3 
+Source datasets loaded:
+  dm : 306 rows | vs : 29643 rows | ex : 591 rows
+  ds : 850 rows | ae : 1191 rows
+Base ADSL rows: 306 (one row per subject expected)
+Treatment dates derived. TRTSDTM non-missing: 254
+Saved: output/q2/adsl.rds
+Saved: output/q2/adsl.csv
+
+══ Quality Checks ════════════════════════════════════════════════════
+
+Dimensions: 306 rows x 50 cols
+Expected:    306 rows (one per subject in DM)
+
+Duplicate USUBJIDs: 0 (expected: 0)
+
+AGEGR9 distribution:
+# A tibble: 2 x 3
+  AGEGR9  AGEGR9N     n
+  <chr>     <int> <int>
+1 18 - 50       2     1
+2 >50           3   305
+
+TRTSDTM non-missing: 254
+TRTSTMF values:
+# A tibble: 2 x 2
+  TRTSTMF     n
+  <chr>   <int>
+1 H         254
+2 <NA>       52
+
+ITTFL distribution:
+# A tibble: 4 x 3
+  ACTARM               ITTFL     n
+  <chr>                <chr> <int>
+1 Placebo              Y        86
+2 Screen Failure       N        52
+3 Xanomeline High Dose Y        72
+4 Xanomeline Low Dose  Y        96
+
+LSTAVLDT non-missing: 306
+LSTAVLDT range: 2012-08-13 to 2015-03-05
+
+== STATUS: SUCCESS — ADSL created error-free ==
